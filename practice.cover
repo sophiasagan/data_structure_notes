@@ -1,0 +1,34 @@
+       # Given an array of integers, 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
+       # Find all the elements that appear twice in this array.
+       # Could you do it without extra space and in O(n) runtime?
+       #leetcode 442 finding all duplicates
+       
+    1: input = [4, 3, 2, 7, 8, 2, 3, 1]
+    1: output = [2, 3]
+       
+    2: class Solution(object):
+       
+    1:      def findDuplicates(self, nums):
+    4:         if not nums:
+    1:             return []
+               
+    3:         result = []
+   15:         for _, num in enumerate(nums):
+   12:             index = abs(num)-1
+   12:             if nums[index] < 0:
+    3:                 result.append(index+1)
+   12:             nums[index]*=-1
+    3:         return result
+               print(nums, result)
+       
+    1: def test():
+    1:     solution = Solution()
+       
+    1:     assert sorted(solution.findDuplicates([])) == []
+    1:     assert sorted(solution.findDuplicates([1])) == []
+    1:     assert sorted(solution.findDuplicates([3, 3, 1])) == [3]
+    1:     assert sorted(solution.findDuplicates([4, 3, 2, 7, 8, 2, 3, 1])) == [2, 3]
+    1:     print("self test passed")
+       
+    1: if __name__ == '__main__':
+    1:     test()

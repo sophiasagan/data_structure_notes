@@ -8,64 +8,27 @@ output = [2, 3]
 
 class Solution(object):
 
-    def findDuplicates(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: List[int]
-        """
-        result = self._findDuplicatesBucketOnePass(nums)
-        # result = self._findDuplicatesBucketTwoPasses(nums)
-        print(nums, result)
-        return result
-
-    def _findDuplicatesBucketOnePass(self, nums):
-        # TODO: one pass solution?
-        # result = []
-        # i = 0
-        # while i < len(nums):
-        #     n = nums[i]
-        #     if nums[n - 1] == n: # value already put in right position
-        #         if n - 1 < i: # but not current position
-        #             # print('found duplicate')
-        #             result.append(n)
-        #         i += 1
-        #     else:
-        #         nums[n - 1], nums[i] = n, nums[n - 1]
-        # return result
-
-        if not nums:
-            return []
+     def findDuplicates(self, nums):
+        if not nums: #if list is empty
+            return [] # return empty array
         
-        result = []
-        for _, num in enumerate(nums):
-            index = abs(num)-1
-            if nums[index] < 0:
-                result.append(index+1)
-            nums[index]*=-1
+        result = [] #empty array for results
+        for _, num in enumerate(nums): #regardless of position for each number, iterate through the list and create a tuple for numbers in the list
+            index = abs(num)-1 #gives us the index -1 e.g. 4 -1 = 7 (in index 3)
+            if nums[index] < 0: # if number matches a previously negative index ...
+                result.append(index+1) # append to results
+            nums[index]*=-1 # makes number in that index negative
         return result
+     
 
+# def test():
+#     solution = Solution()
 
-    # def _findDuplicatesBucketTwoPasses(self, nums):
-    #     result = []
-    #     i = 0
-    #     while i < len(nums):
-    #         n = nums[i]
-    #         if nums[n - 1] == n: # value already put in right position
-    #             i += 1
-    #         else: nums[n - 1], nums[i] = n, nums[n - 1]
-    #     for i, n in enumerate(nums):
-    #         if n == i + 1: continue
-    #         elif nums[n - 1] == n: result.append(n)
-    #     return result
+#     assert sorted(solution.findDuplicates([])) == []
+#     assert sorted(solution.findDuplicates([1])) == []
+#     assert sorted(solution.findDuplicates([3, 3, 1])) == [3]
+#     assert sorted(solution.findDuplicates([4, 3, 2, 7, 8, 2, 3, 1])) == [2, 3]
+#     print("self test passed")
 
-def test():
-    solution = Solution()
-
-    assert sorted(solution.findDuplicates([])) == []
-    assert sorted(solution.findDuplicates([1])) == []
-    assert sorted(solution.findDuplicates([3, 3, 1])) == [3]
-    assert sorted(solution.findDuplicates([4, 3, 2, 7, 8, 2, 3, 1])) == [2, 3]
-    print("self test passed")
-
-if __name__ == '__main__':
-    test()
+# if __name__ == '__main__':
+    # test()
